@@ -1,0 +1,43 @@
+{
+    "name": "saberdigital.holagary.com",
+    "description": "saberdigital.holagary.com",
+    "type": "project",
+    "keywords": ["php", "mvc", "vue", "web"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gary",
+            "email": "tec.gespinoza@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "ext-json": "*",
+        "ext-mbstring": "*"
+    },
+    "require-dev": {
+        "filp/whoops": "^2.15"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/",
+            "Controllers\\": "src/controllers/",
+            "Models\\": "src/models/",
+            "Core\\": "src/core/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "echo 'Autoload optimized!'"
+        ]
+    }
+}
