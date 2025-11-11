@@ -1,0 +1,36 @@
+name: 🚀 Deploy PHP + Vue (Sin Build)
+
+on:
+  push:
+    branches: [main, developer]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+
+    - name: 📦 Install Composer Dependencies
+      run: composer install --no-dev --optimize-autoloader
+
+    - name: 🎯 Deploy to Production (saberdigital.holagary.com)
+      if: github.ref == 'refs/heads/main'
+      uses: SamKirkland/FTP-Deploy-Action@4.3.0
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME_PROD }}
+        password: ${{ secrets.FTP_PASSWORD_PROD }}
+        local-dir: ./
+        server-dir: ./  
+
+    - name: 🔧 Deploy to Development (dev.saberdigital.holagary.com)
+      if: github.ref == 'refs/heads/developer'
+      uses: SamKirkland/FTP-Deploy-Action@4.3.0
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME_DEV }}
+        password: ${{ secrets.FTP_PASSWORD_DEV }}
+        local-dir: ./
+        server-dir: ./ 
